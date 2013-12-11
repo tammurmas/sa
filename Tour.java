@@ -1,7 +1,12 @@
-/*
-* Tour.java
-* Stores a candidate tour through all cities
-*/
+/**
+ * 
+ * Code downloaded from: http://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6
+ * Author: Lee Jacobson
+ * 
+ * Edited by: Urmas T.
+ * 
+ * Defines a path
+ */
 
 package sa;
 
@@ -32,7 +37,9 @@ public class Tour{
         return tour;
     }
 
-    // Creates a random individual
+    /**
+     * Generates a new tour
+     */
     public void generateIndividual() {
         // Loop through all our destination cities and add them to our tour
         for (int cityIndex = 0; cityIndex < TourManager.numberOfCities(); cityIndex++) {
@@ -47,14 +54,22 @@ public class Tour{
         return (City)tour.get(tourPosition);
     }
 
-    // Sets a city in a certain position within a tour
+    /**
+     * Sets a city in a certain position within a tour
+     * 
+     * @param tourPosition
+     * @param city 
+     */
     public void setCity(int tourPosition, City city) {
         tour.set(tourPosition, city);
         // If the tours been altered we need to reset the fitness and distance
         distance = 0;
     }
     
-    // Gets the total distance of the tour
+    /**
+     * Calculates the total distance of a tour
+     * @return 
+     */
     public int getDistance(){
         if (distance == 0) {
             int tourDistance = 0;
@@ -80,17 +95,21 @@ public class Tour{
         return distance;
     }
 
-    // Get number of cities on our tour
+    /**
+     * Helper to get the tour size
+     * @return 
+     */
     public int tourSize() {
         return tour.size();
     }
     
     @Override
     public String toString() {
-        String geneString = "|";
+        String tour = "";
         for (int i = 0; i < tourSize(); i++) {
-            geneString += getCity(i)+"|";
+            if(i+1 < tourSize())
+                tour += "line "+getCity(i)+" "+getCity(i+1)+"\n";
         }
-        return geneString;
+        return tour;
     }
 }
